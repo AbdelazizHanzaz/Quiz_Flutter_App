@@ -19,6 +19,12 @@ class QuizQuestionScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Quiz Questions'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.quiz),
+            onPressed: () => Navigator.pushNamed(context, 'quiz_screen')
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: questions.length,

@@ -1,0 +1,20 @@
+import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:random_quiz/hive/quiz_model.dart';
+
+
+class QuizUtils {
+  static Future<List<Quiz>> loadQuizDataFromJson() async {
+    final jsonString = await rootBundle.loadString('assets/quiz_data.json');
+    final jsonData = json.decode(jsonString) as List<dynamic>;
+
+    final quizzes = jsonData
+        .map<Quiz>((item) => Quiz()
+          ..question = item['question'] as String
+          ..options = (item['options'] as List<dynamic>).cast<String>()
+          ..correctOptionIndex = item['correctOptionIndex'] as int)
+        .toList();
+
+    return quizzes;
+  }
+}
